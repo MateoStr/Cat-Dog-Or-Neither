@@ -1,0 +1,7 @@
+fastapi==0.99.1             # FastAPI framework
+uvicorn==0.23.1            # ASGI server for running FastAPI
+sqlalchemy==1.4.47         # ORM for database interactions
+pydantic==1.10.9           # Data validation library
+mysqlclient==2.1.1         # MySQL database adapter
+# Add any additional packages you may need
+
