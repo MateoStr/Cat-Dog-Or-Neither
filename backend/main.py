@@ -4,5 +4,11 @@ app = FastAPI()
 
 @app.get("/")
 def read_root():
-    return {"message": "Hello, World! It is ME that is in power now!"}
+    return {"message": "Hello, World!"}
+
+
+
+@app.post("/ping")
+def post_ping():
+    return {"message": "Ping!"}
 

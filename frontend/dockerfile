@@ -1,5 +1,5 @@
-# Dockerfile for frontend
-FROM node:14 
+# Build Stage
+FROM node:14 as build-stage
 
 # Set the working directory
 WORKDIR /app
@@ -16,9 +16,14 @@ COPY . .
 # Build the Vue.js app
 RUN npm run build
 
-# Expose port 5000 for the serve process
-EXPOSE 5000
+# Serve Stage
+FROM nginx:stable-alpine as serve-stage
 
-# Serve the app using a static server
-RUN npm install -g serve
-CMD ["serve", "-s", "dist", "-l", "5000"]
+# Copy built files from the build stage
+COPY --from=build-stage /app/dist /usr/share/nginx/html
+
+# Expose port 80 (default for Nginx)
+EXPOSE 80
+
+# Start Nginx server
+CMD ["nginx", "-g", "daemon off;"]
